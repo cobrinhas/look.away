@@ -1,0 +1,3 @@
+
+# every 20 minutes, look away
+*/20 * * * * bash -ic "notify_look_away"

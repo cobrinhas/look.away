@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+alias_source=~/.bash_aliases
+source $alias_source
+
+alias notify_look_away="exec $(pwd)/run.bash"
+
+alias > $alias_source
+
+({ crontab -l; cat cronfile; } | crontab - ) &> /dev/null
