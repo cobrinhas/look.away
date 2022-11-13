@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+repo_name='look.away'
+repo_url="https://github.com/cobrinhas/$repo_name"
+repo_branch='master'
+
+if [[ -x "$(command -v git)" ]]
+then
+    if [[ -d $repo_name ]]
+    then
+        (cd $repo_name; git checkout $repo_branch; git pull)
+    else
+        git clone $repo_url
+    fi
+else
+    if [[ -d $repo_name ]]
+    then
+        rm -rf ./$repo_name
+    fi
+
+    if [[ -f $repo_branch.zip ]]
+    then
+        rm $repo_branch.zip
+    fi
+
+    wget "$repo_url/archive/$repo_branch.zip"
+    unzip $repo_branch.zip
+    
+    rm $repo_branch.zip | mv $repo_name-$repo_branch $repo_name
+fi
