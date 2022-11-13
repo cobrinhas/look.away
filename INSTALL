@@ -7,4 +7,4 @@ alias notify_look_away="exec $(pwd)/run.bash"
 
 alias > $alias_source
 
-({ crontab -l; cat cronfile; } | crontab - ) &> /dev/null
+({ crontab -l; cat cronfile; } | awk '!x[$0]++' | crontab - ) &> /dev/null
